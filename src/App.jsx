@@ -8,6 +8,7 @@ import JoinForm from "./Components/JoinForm";
 import { useEffect } from "react";
 import Conference from "./Components/Conference";
 import Footer from "./Components/Footer";
+import Chat from "./Components/Chat";
 
 function App() {
   const isConnected = useHMSStore(selectIsConnectedToRoom);
@@ -25,7 +26,10 @@ function App() {
     <div className="App">
       {isConnected ? (
         <>
-          <Conference />
+          <div className="main-layout">
+            <Conference />
+            <Chat /> {/* 👈 Add it here */}
+          </div>
           <Footer />
         </>
       ) : (
@@ -33,6 +37,7 @@ function App() {
       )}
     </div>
   );
+  
 }
 
 export default App;
