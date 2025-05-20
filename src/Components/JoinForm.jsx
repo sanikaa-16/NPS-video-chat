@@ -5,7 +5,7 @@ const JoinForm = () => {
   const hmsActions = useHMSActions();
   const [inputValues, setInputValues] = useState({
     name: "",
-    token: "",
+    roomCode: "", // ✅ Corrected: changed from 'token' to 'roomCode'
   });
 
   const handleInputChange = (e) => {
@@ -18,16 +18,20 @@ const JoinForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { userName = "", roomCode = "" } = inputValues;
-
-    const authToken = await hmsActions.getAuthTokenByRoomCode({ roomCode });
+    const { name = "", roomCode = "" } = inputValues; // ✅ Corrected: destructuring correct keys
 
     try {
-      await hmsActions.join({ userName, authToken });
+      const authToken = await hmsActions.getAuthTokenByRoomCode({ roomCode });
+
+      await hmsActions.join({
+        userName: name, // ✅ Corrected: sending actual name as userName
+        authToken,
+      });
     } catch (e) {
-      console.error(e);
+      console.error("Failed to join room:", e);
     }
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <h2>Join Room</h2>
@@ -40,7 +44,7 @@ const JoinForm = () => {
           value={inputValues.name}
           onChange={handleInputChange}
           placeholder="Your Name"
-        ></input>
+        />
       </div>
       <div className="input-container">
         <input
@@ -48,12 +52,14 @@ const JoinForm = () => {
           id="room-code"
           type="text"
           name="roomCode"
+          value={inputValues.roomCode}
           onChange={handleInputChange}
           placeholder="Room Code"
-        ></input>
+        />
       </div>
-      <button className="btn-primary">Join</button>
+      <button type="submit" className="btn-primary">Join</button>
     </form>
   );
 };
+
 export default JoinForm;
