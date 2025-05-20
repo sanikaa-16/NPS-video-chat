@@ -104,26 +104,39 @@ form h2,
   grid-gap: 10px;
 }
 
-.peer-video {
+/* .peer-video {
   height: 250px;
   width: 250px;
   border-radius: 20%;
   object-fit: cover;
   margin-bottom: 10px;
-}
+} */
 
 .local.peer-video {
   transform: scaleX(-1);
 }
 
-.peer-name {
-  font-size: 14px;
-  text-align: center;
+.peer-container {
+  display: flex;
+  flex-direction: column; /* stack video and name vertically */
+  align-items: center;
+  margin: 10px;
 }
 
-.peer-container {
-  padding: 10px;
+.peer-video {
+  width: 200px;
+  height: 150px;
+  background-color: black;
+  border-radius: 8px;
 }
+
+.peer-name {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+}
+
 
 .control-bar {
   display: flex;
@@ -140,19 +153,22 @@ form h2,
 }
 
 .btn-control {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 2px solid #37474f;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  text-align: center;
-  background-color: #607d8b;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-  color: white;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  margin: 0 0.5rem;
   cursor: pointer;
+  color: white;
 }
+
+.btn-control:hover {
+  color: #ffcc00;
+}
+
+.leave-btn {
+  color: red;
+}
+
 
 .hide {
   display: none;
@@ -160,4 +176,40 @@ form h2,
 
 .separator {
   font-size: 12px;
+}
+
+
+.chat-box {
+  border: 1px solid #ccc;
+  width: 300px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  background: #f9f9f9;
+  padding: 0.5rem;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.chat-message {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.chat-input {
+  display: flex;
+  gap: 5px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 5px;
+}
+
+.chat-input button {
+  padding: 5px 10px;
 }
